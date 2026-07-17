@@ -1,15 +1,19 @@
 from fastapi import FastAPI
 
+from services.ingestion_service.config import settings
+
+
 app = FastAPI(
-    title="Distributed Event Processing Platform",
-    description="Backend platform for processing financial events",
-    version="0.1.0"
+    title=settings.app_name,
+    version=settings.app_version
 )
 
 
-@app.get("/")
+@app.get("/health")
 def health_check():
     return {
         "status": "healthy",
-        "service": "ingestion-service"
+        "service": settings.app_name,
+        "version": settings.app_version,
+        "environment": settings.environment
     }
