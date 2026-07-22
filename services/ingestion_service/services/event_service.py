@@ -1,7 +1,12 @@
+import logging
+
 from services.ingestion_service.schemas.event import (
     MarketEventAccepted,
     MarketEventCreate,
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 class EventService:
@@ -9,10 +14,14 @@ class EventService:
         self,
         event: MarketEventCreate,
     ) -> MarketEventAccepted:
-        # Later this method will:
-        # 1. Check for duplicate events.
-        # 2. Publish the event to Kafka.
-        # 3. Record metrics and logs.
+        logger.info(
+            "event_accepted event_id=%s symbol=%s event_type=%s "
+            "exchange=%s",
+            event.event_id,
+            event.symbol,
+            event.event_type,
+            event.exchange,
+        )
 
         return MarketEventAccepted(
             status="accepted",
