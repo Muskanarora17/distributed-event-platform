@@ -2,9 +2,6 @@ import logging
 
 from services.ingestion_service.exceptions import DuplicateEventError
 from services.ingestion_service.repositories.base import EventRepository
-from services.ingestion_service.repositories.in_memory_event_repository import (
-    InMemoryEventRepository,
-)
 from services.ingestion_service.schemas.event import (
     MarketEventAccepted,
     MarketEventCreate,
@@ -41,7 +38,3 @@ class EventService:
             symbol=event.symbol,
             event_type=event.event_type,
         )
-
-
-event_repository = InMemoryEventRepository()
-event_service = EventService(event_repository)
